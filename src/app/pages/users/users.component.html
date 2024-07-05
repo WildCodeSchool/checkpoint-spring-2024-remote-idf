@@ -1,0 +1,74 @@
+<div class="rules" >
+
+
+  <h1>Ici tu dois être en mesure de faire afficher une liste d'utilisateur</h1>
+
+<div>
+  Le résultat de la requête attendu aura la forme suivante:
+</div>
+
+<pre>
+  <code [innerHTML]="exemple" >
+  </code>
+</pre>
+
+
+<div>
+  Pour la requête GET sur l'url suivante:   http://localhost:8080/users
+</div>
+
+</div>
+
+
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+<div *ngIf="!isLoading">
+
+  <div *ngIf="!users" class="error-bloc"  >
+    Impossible de récupérer les données
+  </div>
+
+  <div *ngIf="users?.length == 0">
+    Il n'y a pas de users à afficher
+  </div>
+
+  <div *ngIf="users?.length! > 0">
+
+
+
+    <mat-table [dataSource]="users" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Id. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="firstname">
+        <mat-header-cell *matHeaderCellDef> Prénom </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="lastname">
+        <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="detail">
+        <mat-header-cell *matHeaderCellDef> Détails </mat-header-cell>
+        <mat-cell *matCellDef="let element" > <button mat-button color="primary" [routerLink]="['/details', element.id]" >Afficher les détails</button> </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+
+    <div class="smally" >
+      Vas vérifier que les détails s'affichent correctement ;)
+    </div>
+  </div>
+</div>
+
+

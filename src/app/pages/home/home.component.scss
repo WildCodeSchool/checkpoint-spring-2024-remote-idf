@@ -1,0 +1,47 @@
+:host{
+  background-color: #BBBBDD !important;
+  display: block;
+
+}
+
+section {
+  display: table;
+  margin: 8px;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+}
+
+
+
+.larger{
+  width: 350px;
+  height: 100px;
+  font-size: xx-large;
+  display: inline-block;
+}
+
+.step{
+  margin: 3rem;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000020;
+  transition: all 1s;
+  border-radius: 12px;
+}
+
+.step:hover{
+
+  background-color: #AA440060;
+}

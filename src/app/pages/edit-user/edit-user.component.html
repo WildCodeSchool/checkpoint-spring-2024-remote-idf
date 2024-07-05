@@ -1,0 +1,41 @@
+
+
+
+<div class="smally" >
+  <p>
+    Tiens tiens ... il semble qu'il faille rajouter une propriété "imageUrl" à l'objet user pour pouvoir utiliser ce formulaire
+  </p>
+  <p>
+    Il s'agira d'un PUT sur la route habituelle ex: http://localhost:8080/users/1
+  </p>
+
+  <p>
+    La route devra renvoyer l'objet user mis à jour
+  </p>
+</div>
+
+
+<form *ngIf="user"  (ngSubmit)="edit()" #form="ngForm">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Prénom</mat-label>
+    <input matInput placeholder="Jacque" name="firstname" [(ngModel)]="user.firstname" >
+    <mat-hint>Un prénom</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Nom</mat-label>
+    <input matInput placeholder="Brel"  name="lastname" [(ngModel)]="user.lastname">
+    <mat-hint>Le nom de famille</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>url de la photo</mat-label>
+    <input name="imageUrl" [(ngModel)]="user.imageUrl" matInput placeholder="https://cdn.radiofrance.fr/s3/cruiser-production/2018/07/579f69b1-c13b-4403-92a7-e7b782e37085/1136_gettyimages-177473838.jpg">
+    <mat-hint>N'oublie pas le http</mat-hint>
+  </mat-form-field>
+
+
+  <button type="submit" mat-button [disabled]="!form.form.valid">
+    Envoyer !
+  </button>
+
+</form>

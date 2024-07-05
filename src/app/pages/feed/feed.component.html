@@ -1,0 +1,101 @@
+
+
+  <div class="rules" *ngIf="!isLoading && (!posts || posts?.length == 0)" >
+
+    <h1 id="lefeed" >Le feed</h1>
+
+    <div>
+      Tu dois créer un route pour récupérer le feed de ce nouveau réseau social !!
+    </div>
+
+    <div>
+      Un GET sur http://localhost:8080/posts devra renvoyer quelque chose comme ça:
+    </div>
+
+    <pre>
+      <code [innerHTML]="code1" >
+      </code>
+    </pre>
+
+  </div>
+
+<div  class="error-bloc" *ngIf="!isLoading && posts === undefined" >
+  Je n'ai rien pu récupérer sur la route: http://localhost:8080/posts
+</div>
+
+<div class="error-bloc"  *ngIf="!isLoading && posts?.length === 0" >
+  Le tableau de données est vide, tu peux en rajouter manuellement dans ta bdd
+</div>
+
+
+<div id="main-feed">
+  <mat-card class="example-card" *ngFor="let post of posts, let i = index" >
+  <img mat-card-image [src]="post.imageUrl" alt="Post photo">
+  <mat-card-content>
+    <p>
+      {{post.message}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions *ngIf="!(!posts || posts?.length == 0)" >
+    <button (click)="addComment(i)" mat-button>Commentaires</button>
+  </mat-card-actions>
+  <mat-card-footer *ngIf="post.commentIsVisible" >
+    Liste de commentaire
+
+    <div *ngIf="!post?.comments" >
+      Mince, ce réseau social a visiblement besoin d'avoir une liste de comments associés aux posts.
+
+      Tes posts devraient en fait ressembler à ça :
+
+      <pre>
+        <code [innerHTML]="code2" >
+        </code>
+      </pre>
+    </div>
+
+    <div *ngIf="post?.comments?.length === 0" >
+      On dirait qu'il n'y a pas de donnée dans ta bdd. Essaye d'en rajouter manuellement
+        <pre>
+          <code [innerHTML]="code2" >
+          </code>
+        </pre>
+    </div>
+
+
+    <!-- post?.comments -->
+
+    <mat-list role="list">
+      <mat-list-item *ngFor="let comment of post.comments"  role="listitem">
+        {{comment.message}}
+      </mat-list-item>
+    </mat-list>
+
+
+    <div>
+
+      <div *ngIf="!isScreenValid" >
+
+        Un POST sur la route http://localhost:8080/comments devrait pouvoir créer un commentaire:
+        <pre>
+          <code [innerHTML]="code3" >
+          </code>
+        </pre>
+      </div>
+
+      <form class="example-form" (ngSubmit)="sendComment(post)" #form="ngForm" *ngIf="post?.comments?.length! > 0 " >
+
+        <mat-form-field class="example-full-width">
+        <mat-label>Laisse un com</mat-label>
+        <textarea [(ngModel)]="message" name="message" required  matInput placeholder="Ex. It makes me feel..."></textarea>
+      </mat-form-field>
+      <button mat-button type="submit" [disabled]="!form.form.valid">
+        Envoyer
+      </button>
+    </form>
+  </div>
+
+  </mat-card-footer>
+</mat-card>
+</div>
+
+

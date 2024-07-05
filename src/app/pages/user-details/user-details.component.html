@@ -1,0 +1,53 @@
+
+
+<div class="card-container" *ngIf="user"  >
+  <mat-card class="example-card">
+    <mat-card-header>
+    <div *ngIf="!user.imageUrl"  mat-card-avatar class="example-header-image"></div>
+    <img *ngIf="user.imageUrl" mat-card-avatar [src]="user.imageUrl">
+    <mat-card-title>{{user.firstname}}</mat-card-title>
+    <mat-card-subtitle>{{user.lastname}}</mat-card-subtitle>
+  </mat-card-header>
+  <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+  <!-- <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </mat-card-content> -->
+  <mat-card-actions>
+    <button mat-button [routerLink]="['/edit-user', user.id]"  >Éditer</button>
+    <button *ngIf="user.imageUrl" (click)="deleteUser(user.id!)"  mat-button>Supprimer</button>
+  </mat-card-actions>
+</mat-card>
+
+
+<div class="smally" >
+  <div *ngIf="!user.imageUrl" >
+    Magnifique !
+    <p>
+      Mais je suis presque sûr que tu n'ai pas un chien . . .
+    </p>
+    Essaye de cliquer sur éditer ?
+  </div>
+
+  <div *ngIf="user.imageUrl" >
+    C'est tout de suite mieux non ?
+
+    <p class="delayed" >
+      On dirait que tu peux maintenant essayer de supprimer le user !
+    </p>
+
+    <p class="delayed2" >
+      Du grand classique: un DELETE sur la route de la ressources
+      ex: http://localhost:8080/users/1
+    </p>
+  </div>
+
+
+</div>
+
+
+
+</div>
